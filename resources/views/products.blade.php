@@ -7,8 +7,7 @@
 		<div class="col-md-8 col-md-offset-3">
 		
 		<h3>Add a Product</h3>
-		<form>			
-			{{Form::token() }}
+		<form>						
 			<div class="form-group">
 			<input type="text" name="name" id="name" class="form-control">
 			</div>
