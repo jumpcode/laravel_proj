@@ -18,20 +18,19 @@ class ProductsController extends Controller
     }
 
     public function addProduct(Request $request)
-    {
+    {        
     	$this->validate($request,[
     		'name'=> 'required',
             'price'=> 'required',
             'quantity'=> 'required']); 
-
         $total_value = $request->price * $request->quantity;   
-        //$request->request->add(['total_value'=> $total_value]);
+        $request->request->add(['total_value'=> $total_value]);        
     	Product::create($request->all());
     	
         $products = Product::orderBy('created_at')->get();    
-        //$this->setJSONFile();
+        $this->setJSONFile();
 
-    	return response()->json(['products'=>$products]); //$request->all()]);
+    	return response()->json(['products'=>$products]); 
  		
     }
 
@@ -42,21 +41,23 @@ class ProductsController extends Controller
         foreach($products as $prod){
             $total+=$prod->price*$prod->quantity;
         } 
-        return [$products,$total];
+        return [$products,number_format($total,2)];
     }
 
     protected function setJSONFile()
     {
-        list($products,$total) = getProducts();
+        list($products,$total) = $this->getProducts();
         $arr = [];
         foreach($products as $key => $product){
             $arr[$key][] = $product->name;
             $arr[$key][] = $product->quantity;
             $arr[$key][] = $product->price;
+            $arr[$key][] = $product->total_value;
         }
-        $data = json_encode($arr,['total'=>$total]);
+        $arr = array_merge($arr,['total'=>$total]);
+        $data = json_encode($arr);
         $fileName = 'productsfile.json';
-        File::put(public_path('/upload/json/'.$fileName),$data);
-        return Response::download(public_path('/upload/jsonfile/'.$fileName));
+        File::put(public_path('uploads\\'.$fileName),$data);
+        return Response::download(public_path('uploads\\'.$fileName));
     }
 }

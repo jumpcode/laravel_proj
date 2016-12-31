@@ -25,6 +25,7 @@
 	 }
 	 #total{
 	 	text-align: right;
+	 	margin-right:105px;
 	 }
 	</style>
 	

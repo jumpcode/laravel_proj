@@ -8,15 +8,15 @@
 		
 		<h3>Add a Product</h3>
 		<form>			
-			
+			{{Form::token() }}
 			<div class="form-group">
-			<input type="text" id="name" class="form-control">
+			<input type="text" name="name" id="name" class="form-control">
 			</div>
 			<div class="form-group">
-			<input type="text" id="quantity" class="form-control">
+			<input type="text" name="quantity" id="quantity" class="form-control">
 			</div>
 			<div class="form-group">
-			<input type="text" id="price" class="form-control">
+			<input type="text" name="price" id="price" class="form-control">
 			</div>
 			<div class="form-group">
 			<button type="submit" id="add_product" class="btn btn-primary">Add Product</button>
@@ -46,7 +46,7 @@
 		  </table>
 		 @endforeach		
 		</div>
-		<div id="total" class="col-md-7">{{ $total }}</div>
+		<div id="total" class="col-md-2">{{ $total }}</div>
 	</div>
 	<script>
 		var token = '{{ Session::token() }}';

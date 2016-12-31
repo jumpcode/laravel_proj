@@ -25,12 +25,13 @@ $(document).ready(function(){
             data: record,
             dataType: 'json',
           })
-            .done(function(data){                
+            .done(function(data){    
+                console.log('DATA',data);            
                 var row = '';                
                 var total = 0;
                 var table = '<table>';
                 data['products'].forEach(function(product){
-                  table = table+'<tr><td span class="col-md-3">'+product.name+'</td><td class="col-md-2">'+product.quantity+'</td><td class="col-md-2">'+product.price+'</td><td class="col-md-4">'+product.created_at+'</td></tr>';
+                  table = table+'<tr><td span class="col-md-3">'+product.name+'</td><td class="col-md-2">'+product.quantity+'</td><td class="col-md-2">'+product.price+'</td><td class="col-md-4">'+product.created_at+'</td><td class="col-md-2">'+product.total_value+'</td></tr>';
                   total+=parseFloat(product.price*product.quantity);
                   console.log('TOTal2',total,product.price,product.quantity);
                 });
